@@ -1,13 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sample_bot">
 
-
-<!-- An example of a simple robot with 4 wheels and a body -->
-
-<!-- <xacro:property name="rear_r" value="rear_wheel_right"/>
-<xacro:property name="rear_l" value="rear_wheel_left"/> -->
-
-
 <link name="base_footprint"/>
 <link name="base_link">
     <visual>
