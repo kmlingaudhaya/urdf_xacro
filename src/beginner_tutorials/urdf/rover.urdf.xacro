@@ -4,8 +4,8 @@
 
 <!-- An example of a simple robot with 4 wheels and a body -->
 
-<xacro:property name="rear_r" value="rear_wheel_right"/>
-<xacro:property name="rear_l" value="rear_wheel_left"/>
+<!-- <xacro:property name="rear_r" value="rear_wheel_right"/>
+<xacro:property name="rear_l" value="rear_wheel_left"/> -->
 
 
 <link name="base_footprint"/>
