@@ -9,7 +9,7 @@
   <!-- <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" /> -->
   <arg name="rvizconfig" default="$(find beginner_tutorials)/rviz/mobile_bot.rviz" />
 
-  <param name="robot_description" command="xacro '$(find mobile_bot)/urdf/rover.urdf.xacro'" /> 
+  <param name="robot_description" command="xacro '$(find beginner_tutorials)/urdf/rover.urdf.xacro'"/> 
   <!-- Use the new URDF file -->
 
 

@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="sample_bot">
 
+<!-- An example of a simple robot with 4 wheels and a body -->
 
 <xacro:property name="rear_r" value="rear_wheel_right"/>
 <xacro:property name="rear_l" value="rear_wheel_left"/>
 
-
 <link name="base_footprint"/>
+
+<!-- initializing base link -->
 <link name="base_link">
     <visual>
         <origin xyz="0.0 0.0 0" rpy="0.0 0.0 0.0"/>
@@ -22,7 +24,11 @@
     
 </link>
 
-<link name="front_wheel_left_link">
+
+<!-- macro definition for front wheels -->
+<xacro:macro name="wheels" params="name x y z">
+
+<link name="${name}_link">
     <visual>
          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry> 
@@ -34,8 +40,48 @@
     </visual>
 </link>
 
+<joint name="${name}_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="{name}_link"/>
+    <origin xyz="${x} ${y} ${z}" rpy="1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+</joint>
+    
+</xacro:macro>
 
-<link name="front_wheel_right_link">
+<!-- calling the macro for front wheels -->
+<xacro wheels name="front_wheel_right" x="0.25" y="-0.4" z="0"/>
+<xacro wheels name="front_wheel_left" x="0.25" y="0.4" z="0"/>
+
+
+
+<!-- <link name="front_wheel_left_link">
+    <visual>
+         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry> 
+            <cylinder radius="0.15" length="0.1"/>
+        </geometry>
+        <material name="LightGrey">
+            <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+    </visual>
+</link> -->
+
+
+<!-- <link name="front_wheel_right_link">
+    <visual>
+         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry> 
+            <cylinder radius="0.15" length="0.1"/>
+        </geometry>
+        <material name="LightGrey">
+            <color rgba="0.7 0.7 0.7 1.0"/>
+        </material>
+    </visual>
+</link> -->
+
+<!-- rear left wheel link -->
+<link name="${rear_l}_link">
     <visual>
          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry> 
@@ -47,8 +93,8 @@
     </visual>
 </link>
 
-
-<link name="rear_l_link">
+<!-- rear right wheel link -->
+<link name="${rear_r}_link">
     <visual>
          <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry> 
@@ -60,58 +106,52 @@
     </visual>
 </link>
 
-<link name="rear_r_link">
-    <visual>
-         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <geometry> 
-            <cylinder radius="0.15" length="0.1"/>
-        </geometry>
-        <material name="LightGrey">
-            <color rgba="0.7 0.7 0.7 1.0"/>
-        </material>
-    </visual>
-</link>
-
-
-
-<joint name="rear_r_joint" type="continuous">
-    <parent link="base_footprint"/>
-    <child link="rear_r_link"/>
-    <origin xyz="-0.25 -0.4 0.15" rpy="1.57 0 0"/>
+<!-- joint between rear right wheel and base link -->
+<joint name="${rear_r}_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="${rear_r}_link"/>
+    <origin xyz="-0.25 -0.4 0" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
 </joint>
 
 
-<joint name="rear_l_joint" type="continuous">
-    <parent link="base_footprint"/>
-    <child link="rear_l_link"/>
-    <origin xyz="-0.25 0.4 0.15" rpy="1.57 0 0"/>
+<!-- joint between rear left wheel and base link -->
+<joint name="${rear_l}_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="${rear_l}_link"/>
+    <origin xyz="-0.25 0.4 0" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
 </joint>
 
 
-<joint name="front_wheel_right_joint" type="continuous">
-    <parent link="base_footprint"/>
+<!-- <joint name="front_wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
     <child link="front_wheel_right_link"/>
-    <origin xyz="0.25 -0.4 0.15" rpy="1.57 0 0"/>
+    <origin xyz="0.25 -0.4 0" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
-</joint>
+</joint> -->
 
 
-<joint name="front_wheel_left_joint" type="continuous">
-    <parent link="base_footprint"/>
+<!-- <joint name="front_wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
     <child link="front_wheel_left_link"/>
-    <origin xyz="0.25 0.4 0.15" rpy="1.57 0 0"/>
+    <origin xyz="0.25 0.4 0" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
-</joint>
+</joint> -->
 
 
+<!-- joint between base link and footprint -->
 <joint name="base_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
     <origin xyz="0 0 0.135" rpy="0 0 0"/>
     <axis xyz="0 0 0"/>
 </joint>
+
+
+
+
+
 
 
 
