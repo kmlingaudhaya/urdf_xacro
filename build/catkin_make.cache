@@ -1,0 +1,2 @@
+beginner_tutorials
+-DCATKIN_DEVEL_PREFIX=/home/linga/Desktop/mobile_bot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/linga/Desktop/mobile_bot_ws/install -G Unix Makefiles
